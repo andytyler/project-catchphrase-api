@@ -4,7 +4,11 @@
   "description": "This is a sample template for sam-app - Below is a brief explanation of what we have generated for you:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "send": "npm run build && npm run package && npm run deploy",
+    "build": "sam build",
+    "package": "sam package --s3-bucket catchphrase-api --output-template-file packaged.yaml",
+    "deploy": "sam deploy --template-file packaged.yaml --stack-name catchphrase-catchphrase-stack --capabilities CAPABILITY_IAM"
   },
   "repository": {
     "type": "git",

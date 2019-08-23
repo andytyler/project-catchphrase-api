@@ -19,6 +19,9 @@ exports.lambdaHandler = async (event, context) => {
         // const ret = await axios(url);
         response = {
             'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             'body': JSON.stringify({
                 catchphrases: [
                     'https://www.rd.com/wp-content/uploads/2017/10/this-is-why-there-are-13-in-a-baker-s-dozen_179437478_stevemart-1024x683.jpg',

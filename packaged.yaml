@@ -27,7 +27,7 @@ Outputs:
 Resources:
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/3d3ccfa3b39d02859eff05927b9c800b
+      CodeUri: s3://catchphrase-api/ac60436c3036126d688b987de131954d
       Events:
         HelloWorld:
           Properties:

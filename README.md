@@ -14,6 +14,7 @@ This is a sample template for sam-app - Below is a brief explanation of what we 
 │           └── test-handler.js
 ├── template.yaml               <-- SAM template
 ```
+![alt text]('./GiphyGuess.com API.png')
 
 ## Requirements
 

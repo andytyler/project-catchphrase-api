@@ -37,14 +37,6 @@ Outputs:
       - HelloWorldFunctionRole
       - Arn
 Resources:
-  DynamoMovieTable:
-    PrimaryKey:
-      Name: id
-      Type: String
-    TableName: giphy-guess-table
-    Tags:
-      AppType: Serverless
-    Type: AWS::Serverless::SimpleTable
   GGDynamoFunction:
     Properties:
       CodeUri: s3://catchphrase-api/51e38235dd3ed67a8c11e91f15a5971c
@@ -61,9 +53,17 @@ Resources:
         - Arn
       Runtime: nodejs10.x
     Type: AWS::Serverless::Function
+  GGDynamoTemplateSimpleTable:
+    PrimaryKey:
+      Name: id
+      Type: String
+    TableName: giphy-guess-table
+    Tags:
+      AppType: Serverless
+    Type: AWS::Serverless::SimpleTable
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/b689236e5d6f2edcd8b577398a56544c
+      CodeUri: s3://catchphrase-api/2ee5237cc66f27969b20c530326fc61b
       Events:
         HelloWorld:
           Properties:

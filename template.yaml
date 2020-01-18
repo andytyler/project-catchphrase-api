@@ -33,7 +33,7 @@ Resources:
     Properties:
       CodeUri: ddb/
       Handler: app.lambdaHandler
-      Role: !GetAtt HelloWorldFunctionIamRole
+      # Role: !GetAtt HelloWorldFunctionIamRole
       Runtime: nodejs10.x
       Events:
         HelloWorld:

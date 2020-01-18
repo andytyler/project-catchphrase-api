@@ -39,7 +39,7 @@ Outputs:
 Resources:
   GGDynamoFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/b30f72217643104a0830e79521f37634
+      CodeUri: s3://catchphrase-api/8faed1d2652c862c56e4b393b485ac34
       Events:
         HelloWorld:
           Properties:
@@ -47,10 +47,6 @@ Resources:
             Path: /ddb
           Type: Api
       Handler: app.lambdaHandler
-      Role:
-        Fn::GetAtt:
-        - HelloWorldFunctionRole
-        - Arn
       Runtime: nodejs10.x
     Type: AWS::Serverless::Function
   GGDynamoTemplateSimpleTable:
@@ -63,7 +59,7 @@ Resources:
     Type: AWS::Serverless::SimpleTable
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/f4bab22b9166b98b0a82cd0b32269daf
+      CodeUri: s3://catchphrase-api/5bb6cbfec2b39a7a491e998dccd09428
       Events:
         HelloWorld:
           Properties:

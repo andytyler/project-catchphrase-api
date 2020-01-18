@@ -5,26 +5,24 @@ var response;
 var message;
 var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'})
 
-exports.lambdaHandler = async (event, context) => {
+exports.lambdaHandler = (event, context) => {
     try {
         console.log('got into the lamb');
         let params = {
             TableName: 'catchphrase-catchphrase-stack-GGDynamoTemplateSimpleTable-1UDOH9A0BQ4DU',
             Item: {
-                'id': {S: 'jezzza k'},
-                'NAME': {S: 'jezza k'}
+                "id": {S: "12873647iuheg728vd6s2vd3673v"},
+                "NAME": {S: "jezza k"}
             }
         }
         console.log('params = ' ,params);
         
-        await dynamodb.putItem(params, function(err, data) {
+        dynamodb.putItem(params, function(err, data) {
             if(err) {
-                message = 'Error Occurred Idiot: ' + err
+                console.log('Error Occurred Idiot: ', err);
             } else {
-                message = 'Successfully Added Following Item to DDB: ' + data
-                
+                console.log('Successfully Added Following Item to DDB: ', data);
             }
-            console.log('MESSAGE', message)
         })
 
         // const ret = await axios(url);
@@ -34,7 +32,7 @@ exports.lambdaHandler = async (event, context) => {
                 'Access-Control-Allow-Origin': '*'
             },
             'body': JSON.stringify(
-                {status: "success & complete & " + message}
+                {status: "success & complete"}
             )
         }
     } catch (err) {

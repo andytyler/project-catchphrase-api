@@ -22,7 +22,28 @@ function addItem () {
         if(err) {
             console.log('Error Occurred Idiot: ', err)
         } else {
-            console.log('Successfully Added Item to DDB: ', data)
+            console.log('Successfully Added Following Item to DDB: ', data)
             
         }
     })
+}
+
+exports.lambdaHandler = async (event, context) => {
+    try {
+        // const ret = await axios(url);
+        response = {
+            'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            'body': JSON.stringify({
+                addItem()
+            })
+        }
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
+
+    return response
+};

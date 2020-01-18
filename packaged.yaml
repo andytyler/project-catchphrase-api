@@ -39,7 +39,7 @@ Outputs:
 Resources:
   GGDynamoFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/c41b58d87104c780aef1fa1b63f2a863
+      CodeUri: s3://catchphrase-api/b30f72217643104a0830e79521f37634
       Events:
         HelloWorld:
           Properties:
@@ -63,7 +63,7 @@ Resources:
     Type: AWS::Serverless::SimpleTable
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/dcf98c43aa6742da87863cb0db25e650
+      CodeUri: s3://catchphrase-api/f4bab22b9166b98b0a82cd0b32269daf
       Events:
         HelloWorld:
           Properties:

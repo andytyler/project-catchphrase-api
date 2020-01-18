@@ -10,7 +10,7 @@ Globals:
       Variables:
         DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
         DYNAMO_TABLE:
-          Ref: giphy-guess--table
+          Ref: GGDynamoTemplateSimpleTable
         REGION_NAME: us-east-1
     Timeout: 3
 Outputs:
@@ -18,7 +18,7 @@ Outputs:
     Description: Hello World Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - HelloWorldFunction
+      - GGDynamoFunction
       - Arn
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
@@ -63,7 +63,7 @@ Resources:
     Type: AWS::Serverless::SimpleTable
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/2ee5237cc66f27969b20c530326fc61b
+      CodeUri: s3://catchphrase-api/e3ff507ae4e501ef2f526706deadaf96
       Events:
         HelloWorld:
           Properties:

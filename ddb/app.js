@@ -32,6 +32,7 @@ function addItem () {
 
 exports.lambdaHandler = async (event, context) => {
     try {
+        addItem()
         // const ret = await axios(url);
         response = {
             'statusCode': 200,
@@ -39,7 +40,7 @@ exports.lambdaHandler = async (event, context) => {
                 'Access-Control-Allow-Origin': '*'
             },
             'body': JSON.stringify(
-                addItem()
+                {status: "success & complete"}
             )
         }
     } catch (err) {

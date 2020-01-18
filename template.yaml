@@ -11,7 +11,7 @@ Globals:
     Timeout: 3
     Environment:
         Variables: # these will be important later
-            DYNAMO_TABLE: !Ref giphy-guess--table
+            DYNAMO_TABLE: !Ref GGDynamoTemplateSimpleTable
             DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
             REGION_NAME: us-east-1
 
@@ -43,7 +43,7 @@ Resources:
             Method: get
   GGDynamoTemplateSimpleTable:
       Type: AWS::Serverless::SimpleTable # if you want to define a more complex table, use AWS::DynamoDB::Table
-      TableName: GiphyGuessTable
+      TableName: giphy-guess-table
       PrimaryKey:
           Name: id
           Type: String
@@ -62,7 +62,7 @@ Outputs:
     Value: !GetAtt HelloWorldFunction.Arn
   GGFunction:
     Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
+    Value: !GetAtt GGDynamoFunction.Arn
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn

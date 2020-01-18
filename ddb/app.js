@@ -13,7 +13,7 @@ function addItem () {
     var params = {
         TableName: 'giphy-guess',
         Item: {
-            'id': {S: 'jezza k'},
+            'id': {S: 'jezzza k'},
             'NAME': {S: 'jezza k'}
         }
     }
@@ -27,6 +27,7 @@ function addItem () {
         }
     })
 }
+
 
 exports.lambdaHandler = async (event, context) => {
     try {

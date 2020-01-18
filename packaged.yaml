@@ -37,4 +37,16 @@ Resources:
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
     Type: AWS::Serverless::Function
+  HelloWorldFunction:
+    Properties:
+      CodeUri: s3://catchphrase-api/0e636a0b59a4d9ad5d5da357527bfa8a
+      Events:
+        HelloWorld:
+          Properties:
+            Method: get
+            Path: /hello
+          Type: Api
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
 Transform: AWS::Serverless-2016-10-31

@@ -8,10 +8,10 @@ Globals:
   Function:
     Environment:
       Variables:
-        DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
+        DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
         DYNAMO_TABLE:
           Ref: GGDynamoTemplateSimpleTable
-        REGION_NAME: us-east-1
+        REGION_NAME: eu-west-1
     Timeout: 3
 Outputs:
   GGFunction:
@@ -39,11 +39,11 @@ Outputs:
 Resources:
   GGDynamoFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/51e38235dd3ed67a8c11e91f15a5971c
+      CodeUri: s3://catchphrase-api/c41b58d87104c780aef1fa1b63f2a863
       Events:
         HelloWorld:
           Properties:
-            Method: get
+            Method: post
             Path: /ddb
           Type: Api
       Handler: app.lambdaHandler
@@ -63,7 +63,7 @@ Resources:
     Type: AWS::Serverless::SimpleTable
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/e3ff507ae4e501ef2f526706deadaf96
+      CodeUri: s3://catchphrase-api/dcf98c43aa6742da87863cb0db25e650
       Events:
         HelloWorld:
           Properties:

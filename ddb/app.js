@@ -1,38 +1,36 @@
 // Load the SDK for JavaScript
-import AWS from 'aws-sdk';
+// import AWS from 'aws-sdk';
 // Set the Region 
-AWS.config.update({region: 'eu-west-1'})
-let response;
-
-var dynamodb = new AWS.DynamoDB()
-
-var name = 'danny bogus'
+// AWS.config.update({region: 'eu-west-1'})
+var response;
+// var dynamodb = new AWS.DynamoDB()
+// var name = 'danny bogus'
 
 
-function addItem () {
-    // custoname = custoname || 'generic bob'
-    var params = {
-        TableName: 'giphy-guess-table',
-        Item: {
-            'id': {S: 'jezzza k'},
-            'NAME': {S: 'jezza k'}
-        }
-    }
+// function addItem () {
+//     // custoname = custoname || 'generic bob'
+//     var params = {
+//         TableName: 'giphy-guess-table',
+//         Item: {
+//             'id': {S: 'jezzza k'},
+//             'NAME': {S: 'jezza k'}
+//         }
+//     }
     
-    dynamodb.putItem(params, function(err, data) {
-        if(err) {
-            console.log('Error Occurred Idiot: ', err)
-        } else {
-            console.log('Successfully Added Following Item to DDB: ', data)
+//     dynamodb.putItem(params, function(err, data) {
+//         if(err) {
+//             console.log('Error Occurred Idiot: ', err)
+//         } else {
+//             console.log('Successfully Added Following Item to DDB: ', data)
             
-        }
-    })
-}
+//         }
+//     })
+// }
 
 
 exports.lambdaHandler = async (event, context) => {
     try {
-        addItem()
+        // addItem()
         // const ret = await axios(url);
         response = {
             'statusCode': 200,

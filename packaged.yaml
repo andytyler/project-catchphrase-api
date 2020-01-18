@@ -10,10 +10,16 @@ Globals:
       Variables:
         DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
         DYNAMO_TABLE:
-          Ref: DynamoMovieTable
+          Ref: giphy-guess--table
         REGION_NAME: us-east-1
     Timeout: 3
 Outputs:
+  GGFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
     Value:
@@ -33,15 +39,15 @@ Outputs:
 Resources:
   DynamoMovieTable:
     PrimaryKey:
-      Name: breedId
+      Name: id
       Type: String
-    TableName: catBreedTable
+    TableName: giphy-guess-table
     Tags:
       AppType: Serverless
     Type: AWS::Serverless::SimpleTable
   GGDynamoFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/3e31d89ae460f17c72b88ab8c6a1ee9a
+      CodeUri: s3://catchphrase-api/51e38235dd3ed67a8c11e91f15a5971c
       Events:
         HelloWorld:
           Properties:
@@ -57,7 +63,7 @@ Resources:
     Type: AWS::Serverless::Function
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/7f64e0464549582a25a20d6c1dba5540
+      CodeUri: s3://catchphrase-api/b689236e5d6f2edcd8b577398a56544c
       Events:
         HelloWorld:
           Properties:

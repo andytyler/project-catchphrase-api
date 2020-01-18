@@ -41,7 +41,7 @@ Resources:
           Properties:
             Path: /ddb
             Method: get
-  DynamoMovieTable:
+  GGDynamoTemplateSimpleTable:
       Type: AWS::Serverless::SimpleTable # if you want to define a more complex table, use AWS::DynamoDB::Table
       TableName: giphy-guess-table
       PrimaryKey:

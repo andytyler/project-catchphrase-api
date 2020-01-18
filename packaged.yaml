@@ -35,11 +35,15 @@ Resources:
             Path: /ddb
           Type: Api
       Handler: app.lambdaHandler
+      Role:
+        Fn::GetAtt:
+        - HelloWorldFunctionRole
+        - Arn
       Runtime: nodejs10.x
     Type: AWS::Serverless::Function
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/0e636a0b59a4d9ad5d5da357527bfa8a
+      CodeUri: s3://catchphrase-api/f33003bb1ee3a1455b84a062b32f3c5c
       Events:
         HelloWorld:
           Properties:

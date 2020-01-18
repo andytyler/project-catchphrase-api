@@ -37,9 +37,9 @@ exports.lambdaHandler = async (event, context) => {
             'headers': {
                 'Access-Control-Allow-Origin': '*'
             },
-            'body': JSON.stringify({
+            'body': JSON.stringify(
                 addItem()
-            })
+            )
         }
     } catch (err) {
         console.log(err);

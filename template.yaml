@@ -9,6 +9,11 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+  Environment:
+      Variables: # these will be important later
+          DYNAMO_TABLE: !Ref DynamoMovieTable
+          DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
+          REGION_NAME: us-east-1
 
 Resources:
   HelloWorldFunction:
@@ -36,6 +41,17 @@ Resources:
           Properties:
             Path: /ddb
             Method: get
+  DynamoMovieTable:
+      Type: AWS::DynamoDB::Table # if you want to define a more complex table, use AWS::DynamoDB::Table
+      TableName: catBreedTable
+      PrimaryKey:
+          Name: breedId
+          Type: String
+      ProvisionedThroughput:
+          ReadCapacityUnit: 5
+          WriteCapacityUnits: 5
+      Tags:
+          AppType: Serverless
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

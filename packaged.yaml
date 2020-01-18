@@ -6,6 +6,12 @@ Description: 'sam-app
   '
 Globals:
   Function:
+    Environment:
+      Variables:
+        DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
+        DYNAMO_TABLE:
+          Ref: DynamoMovieTable
+        REGION_NAME: us-east-1
     Timeout: 3
 Outputs:
   HelloWorldApi:
@@ -25,9 +31,17 @@ Outputs:
       - HelloWorldFunctionRole
       - Arn
 Resources:
+  DynamoMovieTable:
+    PrimaryKey:
+      Name: breedId
+      Type: String
+    TableName: catBreedTable
+    Tags:
+      AppType: Serverless
+    Type: AWS::Serverless::SimpleTable
   GGDynamoFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/58af7fdca419501d7a4c39b64d60e541
+      CodeUri: s3://catchphrase-api/3e31d89ae460f17c72b88ab8c6a1ee9a
       Events:
         HelloWorld:
           Properties:
@@ -43,7 +57,7 @@ Resources:
     Type: AWS::Serverless::Function
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/f33003bb1ee3a1455b84a062b32f3c5c
+      CodeUri: s3://catchphrase-api/7f64e0464549582a25a20d6c1dba5540
       Events:
         HelloWorld:
           Properties:

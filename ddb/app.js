@@ -2,6 +2,7 @@
 import AWS from 'aws-sdk';
 // Set the Region 
 AWS.config.update({region: 'eu-west-1'})
+let response;
 
 var dynamodb = new AWS.DynamoDB()
 
@@ -11,7 +12,7 @@ var name = 'danny bogus'
 function addItem () {
     // custoname = custoname || 'generic bob'
     var params = {
-        TableName: 'giphy-guess',
+        TableName: 'giphy-guess-table',
         Item: {
             'id': {S: 'jezzza k'},
             'NAME': {S: 'jezza k'}

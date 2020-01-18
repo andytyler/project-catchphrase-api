@@ -9,11 +9,11 @@ Description: >
 Globals:
   Function:
     Timeout: 3
-  Environment:
-      Variables: # these will be important later
-          DYNAMO_TABLE: !Ref DynamoMovieTable
-          DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
-          REGION_NAME: us-east-1
+    Environment:
+        Variables: # these will be important later
+            DYNAMO_TABLE: !Ref giphy-guess--table
+            DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
+            REGION_NAME: us-east-1
 
 Resources:
   HelloWorldFunction:
@@ -42,14 +42,11 @@ Resources:
             Path: /ddb
             Method: get
   DynamoMovieTable:
-      Type: AWS::DynamoDB::Table # if you want to define a more complex table, use AWS::DynamoDB::Table
-      TableName: catBreedTable
+      Type: AWS::Serverless::SimpleTable # if you want to define a more complex table, use AWS::DynamoDB::Table
+      TableName: giphy-guess-table
       PrimaryKey:
-          Name: breedId
+          Name: id
           Type: String
-      ProvisionedThroughput:
-          ReadCapacityUnit: 5
-          WriteCapacityUnits: 5
       Tags:
           AppType: Serverless
 
@@ -61,6 +58,9 @@ Outputs:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
   HelloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt HelloWorldFunction.Arn
+  GGFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt HelloWorldFunction.Arn
   HelloWorldFunctionIamRole:

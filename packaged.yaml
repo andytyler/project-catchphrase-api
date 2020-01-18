@@ -25,14 +25,14 @@ Outputs:
       - HelloWorldFunctionRole
       - Arn
 Resources:
-  HelloWorldFunction:
+  GGDynamoFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/e2bb4d26bbf615702d44d1ba2b6cbe9d
+      CodeUri: s3://catchphrase-api/58af7fdca419501d7a4c39b64d60e541
       Events:
         HelloWorld:
           Properties:
             Method: get
-            Path: /hello
+            Path: /ddb
           Type: Api
       Handler: app.lambdaHandler
       Runtime: nodejs10.x

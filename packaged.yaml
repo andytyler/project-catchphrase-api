@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
 Description: 'sam-app
 
   Sample SAM Template for sam-app
@@ -6,20 +7,47 @@ Description: 'sam-app
   '
 Globals:
   Function:
+    Timeout: 3
     Environment:
       Variables:
-        DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
         DYNAMO_TABLE:
           Ref: GGDynamoTemplateSimpleTable
+        DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
         REGION_NAME: eu-west-1
-    Timeout: 3
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://catchphrase-api/b92bf1cdd064c224da2c2a71d9708d77
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+  GGDynamoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://catchphrase-api/c633478fa6645c151b980ca4c49a2dfb
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /ddb
+            Method: post
+  GGDynamoTemplateSimpleTable:
+    Type: AWS::Serverless::SimpleTable
+    TableName: giphy-guess-table
+    PrimaryKey:
+      Name: id
+      Type: String
+    Tags:
+      AppType: Serverless
 Outputs:
-  GGFunction:
-    Description: Hello World Lambda Function ARN
-    Value:
-      Fn::GetAtt:
-      - GGDynamoFunction
-      - Arn
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
     Value:
@@ -30,43 +58,15 @@ Outputs:
       Fn::GetAtt:
       - HelloWorldFunction
       - Arn
+  GGFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GGDynamoFunction
+      - Arn
   HelloWorldFunctionIamRole:
     Description: Implicit IAM Role created for Hello World function
     Value:
       Fn::GetAtt:
       - HelloWorldFunctionRole
       - Arn
-Resources:
-  GGDynamoFunction:
-    Properties:
-      CodeUri: s3://catchphrase-api/8faed1d2652c862c56e4b393b485ac34
-      Events:
-        HelloWorld:
-          Properties:
-            Method: post
-            Path: /ddb
-          Type: Api
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-    Type: AWS::Serverless::Function
-  GGDynamoTemplateSimpleTable:
-    PrimaryKey:
-      Name: id
-      Type: String
-    TableName: giphy-guess-table
-    Tags:
-      AppType: Serverless
-    Type: AWS::Serverless::SimpleTable
-  HelloWorldFunction:
-    Properties:
-      CodeUri: s3://catchphrase-api/5bb6cbfec2b39a7a491e998dccd09428
-      Events:
-        HelloWorld:
-          Properties:
-            Method: get
-            Path: /hello
-          Type: Api
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-    Type: AWS::Serverless::Function
-Transform: AWS::Serverless-2016-10-31

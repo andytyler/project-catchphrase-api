@@ -12,7 +12,7 @@ exports.lambdaHandler = (event, context) => {
       TableName: 'catchphrase-catchphrase-stack-GGDynamoTemplateSimpleTable-1UDOH9A0BQ4DU',
       Item: {
         id: { S: '12873647iuheg728vd6s2vd3673v' },
-        NAME: { S: 'jezza k' }
+        NAME: { S: 'jezza k4' }
       }
     }
     console.log('params = ', params)

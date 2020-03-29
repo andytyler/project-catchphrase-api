@@ -8,7 +8,7 @@ var dynamodb = new AWS.DynamoDB({ apiVersion: '2012-08-10' })
 exports.lambdaHandler = (event, context) => {
   try {
     console.log('got into the lamb')
-    consts params = {
+    const params = {
       TableName: 'catchphrase-catchphrase-stack-GGDynamoTemplateSimpleTable-1UDOH9A0BQ4DU',
       Item: {
         id: { S: '12873647iuheg728vd6s2vd3673v' },

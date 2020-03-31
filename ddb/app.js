@@ -2,22 +2,18 @@ var AWS = require('aws-sdk') // Load the SDK for JavaScript
 AWS.config.update({ region: 'eu-west-1' }) // Set the Region
 
 var response
-var message
-var dynamodb = new AWS.DynamoDB({ apiVersion: '2012-08-10' })
+var dynamodb = new AWS.DynamoDB({ apiVersion: '2012-08-10' }).DocumentClient()
 
-exports.lambdaHandler = (event, context) => {
+const dummyData = {
+  TableName: 'catchphrase-catchphrase-stack-GGDynamoTemplateSimpleTable-1UDOH9A0BQ4DU',
+  Item: {
+    NAME: { S: 'Tropical Banana' }
+  }
+}
+
+exports.handler = (event, context) => {
   try {
-    console.log('got into the lamb')
-    const params = {
-      TableName: 'catchphrase-catchphrase-stack-GGDynamoTemplateSimpleTable-1UDOH9A0BQ4DU',
-      Item: {
-        id: { S: '12873647iuheg728vd6s2vd3673v' },
-        NAME: { S: 'jezza k4' }
-      }
-    }
-    console.log('params = ', params)
-
-    dynamodb.putItem(params, function (err, data) {
+    dynamodb.put(dummyData.Item, function (err, data) {
       if (err) {
         console.log('Error Occurred Idiot: ', err)
       } else {

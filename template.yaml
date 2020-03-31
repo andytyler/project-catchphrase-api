@@ -32,14 +32,14 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ddb/
-      Handler: app.lambdaHandler
+      Handler: app.handler
       # Role: !GetAtt HelloWorldFunctionIamRole
       Runtime: nodejs10.x
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /ddb
+            Path: /add
             Method: post
   GGDynamoTemplateSimpleTable:
       Type: AWS::Serverless::SimpleTable # if you want to define a more complex table, use AWS::DynamoDB::Table

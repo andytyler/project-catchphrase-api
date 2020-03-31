@@ -30,14 +30,14 @@ Resources:
   GGDynamoFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/e5647548736e29b97d2dc03b58707b04
-      Handler: app.lambdaHandler
+      CodeUri: s3://catchphrase-api/cda8b61caa720a6eb8e6a317df0ce5ba
+      Handler: app.handler
       Runtime: nodejs10.x
       Events:
         HelloWorld:
           Type: Api
           Properties:
-            Path: /ddb
+            Path: /add
             Method: post
   GGDynamoTemplateSimpleTable:
     Type: AWS::Serverless::SimpleTable

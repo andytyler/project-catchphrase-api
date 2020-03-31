@@ -30,7 +30,7 @@ Resources:
   GGDynamoFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/cda8b61caa720a6eb8e6a317df0ce5ba
+      CodeUri: s3://catchphrase-api/cc9fc5d5e6b6cd420e3419345939634d
       Handler: app.handler
       Runtime: nodejs10.x
       Events:

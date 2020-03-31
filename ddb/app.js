@@ -1,40 +1,47 @@
 var AWS = require('aws-sdk') // Load the SDK for JavaScript
 AWS.config.update({ region: 'eu-west-1' }) // Set the Region
 
-var response
-var dynamodb = new AWS.DynamoDB({ apiVersion: '2012-08-10' }).DocumentClient()
+var dynamo = new AWS.DynamoDB.DocumentClient()
 
-const dummyData = {
-  TableName: 'catchphrase-catchphrase-stack-GGDynamoTemplateSimpleTable-1UDOH9A0BQ4DU',
-  Item: {
-    NAME: { S: 'Tropical Banana' }
-  }
-}
+// const dummyData = {
+//   TableName: 'catchphrase-catchphrase-stack-GGDynamoTemplateSimpleTable-1UDOH9A0BQ4DU',
+//   Item: {
+//     NAME: { S: 'Tropical Banana' }
+//   }
+// }
 
-exports.handler = (event, context) => {
-  try {
-    dynamodb.put(dummyData.Item, function (err, data) {
-      if (err) {
-        console.log('Error Occurred Idiot: ', err)
-      } else {
-        console.log('Successfully Added Following Item to DDB: ', data)
-      }
-    })
+exports.handler = function (event, context, callback) {
+  console.log('Received event:', JSON.stringify(event, null, 2))
 
-    // const ret = await axios(url);
-    response = {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify(
-        { status: 'success & complete' }
-      )
-    }
-  } catch (err) {
-    console.log(err)
-    return err
+  var operation = event.operation
+
+  if (event.tableName) {
+    event.payload.TableName = event.tableName
   }
 
-  return response
+  switch (operation) {
+    case 'create':
+      dynamo.put(event.payload, callback)
+      break
+    case 'read':
+      dynamo.get(event.payload, callback)
+      break
+    case 'update':
+      dynamo.update(event.payload, callback)
+      break
+    case 'delete':
+      dynamo.delete(event.payload, callback)
+      break
+    case 'list':
+      dynamo.scan(event.payload, callback)
+      break
+    case 'echo':
+      callback(null, 'Success')
+      break
+    case 'ping':
+      callback(null, 'pong')
+      break
+    default:
+      callback(`Unknown operation: ${operation}`)
+  }
 }

@@ -15,18 +15,38 @@ Globals:
         DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
         REGION_NAME: eu-west-1
 Resources:
-  HelloWorldFunction:
+  GetFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/b92bf1cdd064c224da2c2a71d9708d77
-      Handler: app.lambdaHandler
+      CodeUri: s3://catchphrase-api/4284828161ccd99cf2cebccc43128a92
+      Handler: app.getHandler
       Runtime: nodejs10.x
       Events:
         HelloWorld:
           Type: Api
           Properties:
-            Path: /hello
+            Path: /list
             Method: get
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: GGDynamoTemplateSimpleTable
+  PostFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://catchphrase-api/cc4b4cf5a767c0211e58dbbe31d0a6aa
+      Handler: app.postHandler
+      Runtime: nodejs10.x
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /add
+            Method: post
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: GGDynamoTemplateSimpleTable
   GGDynamoFunction:
     Type: AWS::Serverless::Function
     Properties:

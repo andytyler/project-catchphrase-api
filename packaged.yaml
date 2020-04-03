@@ -47,18 +47,6 @@ Resources:
       - DynamoDBCrudPolicy:
           TableName:
             Ref: GGDynamoTemplateSimpleTable
-  GGDynamoFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: s3://catchphrase-api/cc9fc5d5e6b6cd420e3419345939634d
-      Handler: app.handler
-      Runtime: nodejs10.x
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /add
-            Method: post
   GGDynamoTemplateSimpleTable:
     Type: AWS::Serverless::SimpleTable
     TableName: giphy-guess-table
@@ -67,26 +55,3 @@ Resources:
       Type: String
     Tags:
       AppType: Serverless
-Outputs:
-  HelloWorldApi:
-    Description: API Gateway endpoint URL for Prod stage for Hello World function
-    Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
-  HelloWorldFunction:
-    Description: Hello World Lambda Function ARN
-    Value:
-      Fn::GetAtt:
-      - HelloWorldFunction
-      - Arn
-  GGFunction:
-    Description: Hello World Lambda Function ARN
-    Value:
-      Fn::GetAtt:
-      - GGDynamoFunction
-      - Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
-    Value:
-      Fn::GetAtt:
-      - HelloWorldFunctionRole
-      - Arn

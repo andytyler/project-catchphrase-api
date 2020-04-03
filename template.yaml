@@ -16,18 +16,41 @@ Globals:
             REGION_NAME: eu-west-1
 
 Resources:
-  HelloWorldFunction:
+
+  GetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: hello-world/
-      Handler: app.lambdaHandler
+      Handler: app.getHandler
       Runtime: nodejs10.x
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
+            Path: /list
             Method: get
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref GGDynamoTemplateSimpleTable
+
+  PostFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hello-world/
+      Handler: app.postHandler
+      Runtime: nodejs10.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /add
+            Method: post
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref GGDynamoTemplateSimpleTable
+
+
+
   GGDynamoFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:

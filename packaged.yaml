@@ -11,14 +11,14 @@ Globals:
     Environment:
       Variables:
         DYNAMO_TABLE:
-          Ref: GGDynamoTemplateSimpleTable
+          Ref: DataStoreTable
         DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
         REGION_NAME: eu-west-1
 Resources:
   GetFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/4284828161ccd99cf2cebccc43128a92
+      CodeUri: s3://catchphrase-api/377b733e6ab21234be930e2c6a27f690
       Handler: app.getHandler
       Runtime: nodejs10.x
       Events:
@@ -30,11 +30,11 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
-            Ref: GGDynamoTemplateSimpleTable
+            Ref: DataStoreTable
   PostFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/cc4b4cf5a767c0211e58dbbe31d0a6aa
+      CodeUri: s3://catchphrase-api/a16006fc3749d8d3138a5fb569d3a648
       Handler: app.postHandler
       Runtime: nodejs10.x
       Events:
@@ -46,10 +46,10 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
-            Ref: GGDynamoTemplateSimpleTable
-  GGDynamoTemplateSimpleTable:
+            Ref: DataStoreTable
+  DataStoreTable:
     Type: AWS::Serverless::SimpleTable
-    TableName: giphy-guess-table
+    TableName: giphy-guess-table-name
     PrimaryKey:
       Name: id
       Type: String

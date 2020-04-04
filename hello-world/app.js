@@ -1,6 +1,5 @@
 // const axios = require('axios')
 // const url = 'http://checkip.amazonaws.com/';
-let response
 
 /**
  *
@@ -14,110 +13,60 @@ let response
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  *
  */
-exports.getHandler = async (event, context) => {
-  try {
-    // const ret = await axios(url);
-    response = {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({
-        catchphrases: [
-          'https://www.rd.com/wp-content/uploads/2017/10/this-is-why-there-are-13-in-a-baker-s-dozen_179437478_stevemart-1024x683.jpg',
-          'https://thumbs.dreamstime.com/z/as-dead-as-dodo-1489991.jpg',
-          'https://media.photoblog.com/photos5/96736-1237849384-5-l.jpg',
-          'https://www.heinzmarketing.com/wp-content/uploads/2017/08/A-watched-pot-never-boils.jpg',
-          'https://www.iaexperiment.com/wp-content/uploads/2016/08/Foot-in-the-door-02.png',
-          'https://100-pics.net/images/answers/en/whatphrase/whatphrase_32729_168456.gif',
-          'https://americancultureconsultants.com/wp-content/uploads/2017/08/bird-hand-cartoon-1080x675.jpg',
-          'https://13degreez.files.wordpress.com/2012/12/rock-and-a-hard-place-resized-600.png',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf-I9aLHTLOMuHF9ZNd08K8wTRDNDTy969ktAx8s4deh26bCHMSA',
-          'https://cdn2.vectorstock.com/i/1000x1000/33/46/saying-raining-cats-and-dogs-cartoon-vector-16803346.jpg',
-          'https://i.imgur.com/uGjyeQT.jpg',
-          'http://idiomic.com/wp-content/uploads/2016/12/idiomic_pickle_600.jpg',
-          'https://f4.bcbits.com/img/a3782539710_10.jpg',
-          'https://keystoneelderlaw.com/wp-content/uploads/2018/03/nest-egg.jpg'
-        ]
-        // location: ret.data.trim()
-      })
-    }
-  } catch (err) {
-    console.log(err)
-    return err
-  }
-
-  return response
-}
 
 exports.getHandler = async (event, context) => {
-  try {
-    // const ret = await axios(url);
-    response = {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({
-        catchphrases: [
-          'https://www.rd.com/wp-content/uploads/2017/10/this-is-why-there-are-13-in-a-baker-s-dozen_179437478_stevemart-1024x683.jpg',
-          'https://thumbs.dreamstime.com/z/as-dead-as-dodo-1489991.jpg',
-          'https://media.photoblog.com/photos5/96736-1237849384-5-l.jpg',
-          'https://www.heinzmarketing.com/wp-content/uploads/2017/08/A-watched-pot-never-boils.jpg',
-          'https://www.iaexperiment.com/wp-content/uploads/2016/08/Foot-in-the-door-02.png',
-          'https://100-pics.net/images/answers/en/whatphrase/whatphrase_32729_168456.gif',
-          'https://americancultureconsultants.com/wp-content/uploads/2017/08/bird-hand-cartoon-1080x675.jpg',
-          'https://13degreez.files.wordpress.com/2012/12/rock-and-a-hard-place-resized-600.png',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf-I9aLHTLOMuHF9ZNd08K8wTRDNDTy969ktAx8s4deh26bCHMSA',
-          'https://cdn2.vectorstock.com/i/1000x1000/33/46/saying-raining-cats-and-dogs-cartoon-vector-16803346.jpg',
-          'https://i.imgur.com/uGjyeQT.jpg',
-          'http://idiomic.com/wp-content/uploads/2016/12/idiomic_pickle_600.jpg',
-          'https://f4.bcbits.com/img/a3782539710_10.jpg',
-          'https://keystoneelderlaw.com/wp-content/uploads/2018/03/nest-egg.jpg'
-        ]
-        // location: ret.data.trim()
-      })
-    }
-  } catch (err) {
-    console.log(err)
-    return err
+  const params = {
+    TableName: 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW'
   }
-
-  return response
+  const data = await dynamo.scan(params).promise()
+  return {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: data
+  }
 }
 
-exports.postHandler = async (event, context) => {
-  try {
-    // const ret = await axios(url);
-    response = {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({
-        catchphrases: [
-          'https://www.rd.com/wp-content/uploads/2017/10/this-is-why-there-are-13-in-a-baker-s-dozen_179437478_stevemart-1024x683.jpg',
-          'https://thumbs.dreamstime.com/z/as-dead-as-dodo-1489991.jpg',
-          'https://media.photoblog.com/photos5/96736-1237849384-5-l.jpg',
-          'https://www.heinzmarketing.com/wp-content/uploads/2017/08/A-watched-pot-never-boils.jpg',
-          'https://www.iaexperiment.com/wp-content/uploads/2016/08/Foot-in-the-door-02.png',
-          'https://100-pics.net/images/answers/en/whatphrase/whatphrase_32729_168456.gif',
-          'https://americancultureconsultants.com/wp-content/uploads/2017/08/bird-hand-cartoon-1080x675.jpg',
-          'https://13degreez.files.wordpress.com/2012/12/rock-and-a-hard-place-resized-600.png',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf-I9aLHTLOMuHF9ZNd08K8wTRDNDTy969ktAx8s4deh26bCHMSA',
-          'https://cdn2.vectorstock.com/i/1000x1000/33/46/saying-raining-cats-and-dogs-cartoon-vector-16803346.jpg',
-          'https://i.imgur.com/uGjyeQT.jpg',
-          'http://idiomic.com/wp-content/uploads/2016/12/idiomic_pickle_600.jpg',
-          'https://f4.bcbits.com/img/a3782539710_10.jpg',
-          'https://keystoneelderlaw.com/wp-content/uploads/2018/03/nest-egg.jpg'
-        ]
-        // location: ret.data.trim()
-      })
-    }
-  } catch (err) {
-    console.log(err)
-    return err
-  }
+// set up db access
+var AWS = require('aws-sdk') // Load the SDK for JavaScript
+AWS.config.update({ region: 'eu-west-1' }) // Set the Region
+const dynamo = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-1' })
+console.log('set up and declared the db interaction')
 
-  return response
+exports.postHandler = async (item) => {
+  const params = {
+    TableName: 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW',
+    Item: JSON.parse(item.body)
+  }
+  console.log(item)
+  return dynamo.put(params).promise()
 }
+
+// exports.postHandler = async (event, context) => {
+//   console.log('inside the correct handler')
+//   try {
+//     var item = { id: 'xyz', info: 'something' } // event.item ||
+//     var params = {
+//       TableName: 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW',
+//       Item: item
+//     }
+//     console.log('about to do post')
+
+//     dynamo.put(params).promise()
+
+//     return {
+//       statusCode: 200,
+//       headers: {
+//         'Access-Control-Allow-Origin': '*'
+//       },
+//       body: JSON.stringify({
+//         message: 'Sussessfully made post'
+//         // location: ret.data.trim()
+//       })
+//     }
+//   } catch (err) {
+//     console.log(err)
+//     return err
+//   }
+// }

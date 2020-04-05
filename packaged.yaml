@@ -6,6 +6,11 @@ Description: 'sam-app
 
   '
 Globals:
+  Api:
+    Cors:
+      AllowMethods: '''OPTIONS,POST,GET'''
+      AllowHeaders: '''Content-Type'''
+      AllowOrigin: '''http://dashboard-rotator-bucket.s3-website-eu-west-1.amazonaws.com'''
   Function:
     Timeout: 3
     Environment:
@@ -18,7 +23,7 @@ Resources:
   GetFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/377b733e6ab21234be930e2c6a27f690
+      CodeUri: s3://catchphrase-api/e56250b918efdd44733f686b0326e943
       Handler: app.getHandler
       Runtime: nodejs10.x
       Events:
@@ -34,7 +39,7 @@ Resources:
   PostFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/a16006fc3749d8d3138a5fb569d3a648
+      CodeUri: s3://catchphrase-api/9081e15f1fa4a427b4387146ceb4f2b2
       Handler: app.postHandler
       Runtime: nodejs10.x
       Events:

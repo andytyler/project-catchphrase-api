@@ -14,59 +14,60 @@
  *
  */
 
-exports.getHandler = async (event, context) => {
+// import { v4 as uuidv4 } from 'uuid'
+var uuid = require('uuid/v4')
+var AWS = require('aws-sdk') // Load the SDK for JavaScript
+AWS.config.update({ region: 'eu-west-1' }) // Set the Region
+const dynamo = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-1' })
+
+const TABLE_NAME = 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW'
+
+exports.getHandler = async (event) => {
   const params = {
-    TableName: 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW'
+    TableName: TABLE_NAME
   }
-  const data = await dynamo.scan(params).promise()
+
+  const scan = await dynamo.scan(params).promise()
+  console.log(scan)
+
+  function onlyURL (element) {
+    return element.url
+  }
+  const data = scan.Items.map(onlyURL)
+  const filteredData = data.filter(item => item != null)
+
+  console.log(data)
+
   return {
     statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    body: data
+    body: JSON.stringify({
+      catchphrases: filteredData
+    })
   }
 }
-
-// set up db access
-var AWS = require('aws-sdk') // Load the SDK for JavaScript
-AWS.config.update({ region: 'eu-west-1' }) // Set the Region
-const dynamo = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-1' })
-console.log('set up and declared the db interaction')
 
 exports.postHandler = async (item) => {
+  const data = JSON.parse(item.body)
+  const guid = uuid()
+  data.id = guid
+  console.log(data)
+
   const params = {
-    TableName: 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW',
-    Item: JSON.parse(item.body)
+    TableName: TABLE_NAME,
+    Item: data
   }
+
   console.log(item)
-  return dynamo.put(params).promise()
+  
+  
+  dynamo.put(params).promise()
+
+  headers: {
+    "x-custom-header" : "my custom header value",
+    "Access-Control-Allow-Origin": "my-origin.com"
+  },
+  return
 }
-
-// exports.postHandler = async (event, context) => {
-//   console.log('inside the correct handler')
-//   try {
-//     var item = { id: 'xyz', info: 'something' } // event.item ||
-//     var params = {
-//       TableName: 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW',
-//       Item: item
-//     }
-//     console.log('about to do post')
-
-//     dynamo.put(params).promise()
-
-//     return {
-//       statusCode: 200,
-//       headers: {
-//         'Access-Control-Allow-Origin': '*'
-//       },
-//       body: JSON.stringify({
-//         message: 'Sussessfully made post'
-//         // location: ret.data.trim()
-//       })
-//     }
-//   } catch (err) {
-//     console.log(err)
-//     return err
-//   }
-// }

@@ -22,6 +22,7 @@
   "homepage": "https://github.com/andytyler/project-catchphrase-api#readme",
   "dependencies": {
     "aws-sam-local": "^0.2.11",
-    "sam": "0.0.7"
+    "sam": "0.0.7",
+    "uuid": "^7.0.3"
   }
 }

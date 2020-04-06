@@ -6,11 +6,6 @@ Description: 'sam-app
 
   '
 Globals:
-  Api:
-    Cors:
-      AllowMethods: '''OPTIONS,POST,GET'''
-      AllowHeaders: '''Content-Type'''
-      AllowOrigin: '''http://dashboard-rotator-bucket.s3-website-eu-west-1.amazonaws.com'''
   Function:
     Timeout: 3
     Environment:
@@ -23,7 +18,7 @@ Resources:
   GetFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/e56250b918efdd44733f686b0326e943
+      CodeUri: s3://catchphrase-api/52ac52498d618a52fe5c2ec38417ca3d
       Handler: app.getHandler
       Runtime: nodejs10.x
       Events:
@@ -32,6 +27,7 @@ Resources:
           Properties:
             Path: /list
             Method: get
+            cors: true
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -39,7 +35,7 @@ Resources:
   PostFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/9081e15f1fa4a427b4387146ceb4f2b2
+      CodeUri: s3://catchphrase-api/a74b9cd3c943c301392af90b2fb4d2c1
       Handler: app.postHandler
       Runtime: nodejs10.x
       Events:
@@ -48,6 +44,7 @@ Resources:
           Properties:
             Path: /add
             Method: post
+            cors: true
       Policies:
       - DynamoDBCrudPolicy:
           TableName:

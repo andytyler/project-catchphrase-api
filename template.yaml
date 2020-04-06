@@ -7,12 +7,6 @@ Description: >
   
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
-  Api:
-    # Allows an application running locally on port 8080 to call this API
-    Cors:
-      AllowMethods: "'OPTIONS,POST,GET'"
-      AllowHeaders: "'Content-Type'"
-      AllowOrigin: "'http://dashboard-rotator-bucket.s3-website-eu-west-1.amazonaws.com'"
   Function:
     Timeout: 3
     Environment:
@@ -35,6 +29,7 @@ Resources:
           Properties:
             Path: /list
             Method: get
+            cors: true
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DataStoreTable
@@ -51,6 +46,7 @@ Resources:
           Properties:
             Path: /add
             Method: post
+            cors: true
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DataStoreTable

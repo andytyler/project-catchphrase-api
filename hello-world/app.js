@@ -61,13 +61,16 @@ exports.postHandler = async (item) => {
   }
 
   console.log(item)
-  
-  
-  dynamo.put(params).promise()
 
-  headers: {
-    "x-custom-header" : "my custom header value",
-    "Access-Control-Allow-Origin": "my-origin.com"
-  },
-  return
+  var responseCode = 200
+  await dynamo.put(params).promise()
+  var response = {
+    statusCode: responseCode,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify('added that damn data to ddb')
+  }
+
+  return response
 }

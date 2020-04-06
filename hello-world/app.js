@@ -69,7 +69,7 @@ exports.postHandler = async (item) => {
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify('added that damn data to ddb')
+    body: JSON.stringify('added that damn data to dynamodb')
   }
 
   return response

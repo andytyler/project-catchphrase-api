@@ -14,9 +14,7 @@ Globals:
             DYNAMO_TABLE: !Ref DataStoreTable
             DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
             REGION_NAME: eu-west-1
-
 Resources:
-
   GetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -33,7 +31,6 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DataStoreTable
-
   PostFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -50,7 +47,6 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DataStoreTable
-
   DataStoreTable:
       Type: AWS::Serverless::SimpleTable # if you want to define a more complex table, use AWS::DynamoDB::Table
       TableName: giphy-guess-table-name

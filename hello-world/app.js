@@ -60,7 +60,8 @@ exports.postHandler = async (item) => {
     Item: data
   }
 
-  console.log(item)
+  console.log('THIS IS THE REQUEST ITEM*****', item)
+  console.log('THIS IS THE PARAMS *****', params)
 
   // var responseCode = 200
   await dynamo.put(params).promise()
@@ -71,7 +72,7 @@ exports.postHandler = async (item) => {
       'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify({
-      Item: data
+      catchphrases: data
     })
   }
 }

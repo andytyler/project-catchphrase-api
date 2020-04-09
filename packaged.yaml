@@ -6,6 +6,11 @@ Description: 'sam-app
 
   '
 Globals:
+  Api:
+    Cors:
+      AllowMethods: '''OPTIONS,POST,GET'''
+      AllowHeaders: '''Content-Type'''
+      AllowOrigin: '''*'''
   Function:
     Timeout: 3
     Environment:
@@ -18,7 +23,7 @@ Resources:
   GetFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/8a6d7b20829a73036b3cf24d08ca6c2b
+      CodeUri: s3://catchphrase-api/ef7a68611ce8b84ce895727cef136b41
       Handler: app.getHandler
       Runtime: nodejs10.x
       Events:
@@ -34,7 +39,7 @@ Resources:
   PostFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/997f3a1d2f5595633c78e94250ce830d
+      CodeUri: s3://catchphrase-api/088d29edb5efeca3e4d67aacfb86e16e
       Handler: app.postHandler
       Runtime: nodejs10.x
       Events:

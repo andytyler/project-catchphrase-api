@@ -20,7 +20,7 @@ var AWS = require('aws-sdk') // Load the SDK for JavaScript
 AWS.config.update({ region: 'eu-west-1' }) // Set the Region
 const dynamo = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-1' })
 
-const TABLE_NAME = 'catchphrase-catchphrase-stack-DataStoreTable-DBCHTQBXRJTW'
+const TABLE_NAME = 'catchphrase-api-stack-DataStoreTable-1FSDCDRWXZYFZ'
 
 exports.getHandler = async (event) => {
   const params = {
@@ -53,7 +53,7 @@ exports.postHandler = async (item) => {
   const data = JSON.parse(item.body)
   const guid = uuid()
   data.id = guid
-  console.log(data)
+  console.log('THIS IS THE DATA*****', data)
 
   const params = {
     TableName: TABLE_NAME,
@@ -62,15 +62,16 @@ exports.postHandler = async (item) => {
 
   console.log(item)
 
-  var responseCode = 200
+  // var responseCode = 200
   await dynamo.put(params).promise()
-  var response = {
-    statusCode: responseCode,
+
+  return {
+    statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify('added that damn data to dynamodb')
+    body: JSON.stringify({
+      Item: data
+    })
   }
-
-  return response
 }

@@ -18,7 +18,7 @@ Resources:
   GetFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/f569205593b035c780ba03e69b093894
+      CodeUri: s3://catchphrase-api/8a6d7b20829a73036b3cf24d08ca6c2b
       Handler: app.getHandler
       Runtime: nodejs10.x
       Events:
@@ -27,7 +27,6 @@ Resources:
           Properties:
             Path: /list
             Method: get
-            cors: true
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -35,7 +34,7 @@ Resources:
   PostFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://catchphrase-api/e8db97650a609d7ca393edf6557f343c
+      CodeUri: s3://catchphrase-api/997f3a1d2f5595633c78e94250ce830d
       Handler: app.postHandler
       Runtime: nodejs10.x
       Events:
@@ -44,7 +43,6 @@ Resources:
           Properties:
             Path: /add
             Method: post
-            cors: true
       Policies:
       - DynamoDBCrudPolicy:
           TableName:

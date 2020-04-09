@@ -27,7 +27,6 @@ Resources:
           Properties:
             Path: /list
             Method: get
-            cors: true
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DataStoreTable
@@ -43,7 +42,6 @@ Resources:
           Properties:
             Path: /add
             Method: post
-            cors: true
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DataStoreTable

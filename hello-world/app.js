@@ -76,3 +76,30 @@ exports.postHandler = async (item) => {
     })
   }
 }
+
+exports.deleteHandler = async (item) => {
+  const data = JSON.parse(item.body)
+  const guid = uuid()
+  data.id = guid
+  console.log('THIS IS THE DATA*****', data)
+
+  const params = {
+    TableName: TABLE_NAME,
+    Item: data
+  }
+
+  console.log('THIS IS THE REQUEST ITEM*****', item)
+  console.log('THIS IS THE PARAMS *****', params)
+
+  await dynamo.delete(params).promise()
+
+  return {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify({
+      catchphrases: data
+    })
+  }
+}

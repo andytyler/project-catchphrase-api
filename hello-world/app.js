@@ -79,8 +79,6 @@ exports.postHandler = async (item) => {
 
 exports.deleteHandler = async (item) => {
   const data = JSON.parse(item.body)
-  const guid = uuid()
-  data.id = guid
   console.log('THIS IS THE DATA*****', data)
 
   const params = {

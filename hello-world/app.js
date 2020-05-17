@@ -33,7 +33,7 @@ exports.getHandler = async (event) => {
   function onlyURL (element) {
     return element.url
   }
-  const data = scan.Items.map(onlyURL) //
+  const data = scan.Items.map() //onlyURL
   const filteredData = data.filter(item => item != null)
 
   console.log(data)

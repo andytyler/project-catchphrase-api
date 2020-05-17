@@ -85,7 +85,7 @@ exports.deleteHandler = async (item) => {
 
   const params = {
     TableName: TABLE_NAME,
-    Item: data
+    Key: data.id
   }
 
   console.log('THIS IS THE REQUEST ITEM*****', item)

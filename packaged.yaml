@@ -29,7 +29,7 @@ Resources:
     Type: AWS::Serverless::SimpleTable
   DeleteFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/984288fcea3161713e2858940f06114f
+      CodeUri: s3://catchphrase-api/23cb691158cf94a50daef4eb9344f139
       Events:
         HelloWorld:
           Properties:
@@ -45,7 +45,7 @@ Resources:
     Type: AWS::Serverless::Function
   GetFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/b564052de2bddf9f7c3f3e06ea4e0e05
+      CodeUri: s3://catchphrase-api/179536ef5e5c6d4525b4fa28670403d4
       Events:
         HelloWorld:
           Properties:
@@ -61,7 +61,7 @@ Resources:
     Type: AWS::Serverless::Function
   PostFunction:
     Properties:
-      CodeUri: s3://catchphrase-api/09dfe66d1a5bcc6fea88a1d780e7e1d9
+      CodeUri: s3://catchphrase-api/de67f871ab0728b35881b595ac3633fe
       Events:
         HelloWorld:
           Properties:

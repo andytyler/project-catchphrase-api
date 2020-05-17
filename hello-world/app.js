@@ -49,18 +49,19 @@ exports.getHandler = async (event) => {
   }
 }
 
-exports.postHandler = async (item) => {
-  const data = JSON.parse(item.body)
+exports.postHandler = async (event) => {
+  console.log('THIS IS THE REQUEST ITEM*****', event)
+  
+  const data = JSON.parse(event.body)
+  console.log('THIS IS THE DATA*****', data)
   const guid = uuid()
   data.id = guid
-  console.log('THIS IS THE DATA*****', data)
-
+  
   const params = {
     TableName: TABLE_NAME,
     Item: data
   }
-
-  console.log('THIS IS THE REQUEST ITEM*****', item)
+  
   console.log('THIS IS THE PARAMS *****', params)
 
   // var responseCode = 200
@@ -76,6 +77,7 @@ exports.postHandler = async (item) => {
     })
   }
 }
+
 
 exports.deleteHandler = async (item) => {
   const data = JSON.parse(item.body)

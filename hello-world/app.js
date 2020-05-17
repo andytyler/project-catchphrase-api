@@ -44,7 +44,7 @@ exports.getHandler = async (event) => {
       'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify({
-      catchphrases: filteredData
+      catchphrases: scan
     })
   }
 }

@@ -1,5 +1,4 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
 Description: 'sam-app
 
   Sample SAM Template for sam-app
@@ -8,55 +7,72 @@ Description: 'sam-app
 Globals:
   Api:
     Cors:
-      AllowMethods: '''OPTIONS,POST,GET'''
       AllowHeaders: '''Content-Type'''
+      AllowMethods: '''OPTIONS,POST,GET'''
       AllowOrigin: '''*'''
   Function:
-    Timeout: 3
     Environment:
       Variables:
+        DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
         DYNAMO_TABLE:
           Ref: DataStoreTable
-        DB_ENDPOINT: http://dynamodb.eu-west-1.amazonaws.com
         REGION_NAME: eu-west-1
+    Timeout: 3
 Resources:
-  GetFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: s3://catchphrase-api/ef7a68611ce8b84ce895727cef136b41
-      Handler: app.getHandler
-      Runtime: nodejs10.x
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /list
-            Method: get
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: DataStoreTable
-  PostFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: s3://catchphrase-api/088d29edb5efeca3e4d67aacfb86e16e
-      Handler: app.postHandler
-      Runtime: nodejs10.x
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /add
-            Method: post
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: DataStoreTable
   DataStoreTable:
-    Type: AWS::Serverless::SimpleTable
-    TableName: giphy-guess-table-name
     PrimaryKey:
       Name: id
       Type: String
+    TableName: giphy-guess-table-name
     Tags:
       AppType: Serverless
+    Type: AWS::Serverless::SimpleTable
+  DeleteFunction:
+    Properties:
+      CodeUri: s3://catchphrase-api/984288fcea3161713e2858940f06114f
+      Events:
+        HelloWorld:
+          Properties:
+            Method: post
+            Path: /delete
+          Type: Api
+      Handler: app.deleteHandler
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: DataStoreTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
+  GetFunction:
+    Properties:
+      CodeUri: s3://catchphrase-api/b564052de2bddf9f7c3f3e06ea4e0e05
+      Events:
+        HelloWorld:
+          Properties:
+            Method: get
+            Path: /list
+          Type: Api
+      Handler: app.getHandler
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: DataStoreTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
+  PostFunction:
+    Properties:
+      CodeUri: s3://catchphrase-api/09dfe66d1a5bcc6fea88a1d780e7e1d9
+      Events:
+        HelloWorld:
+          Properties:
+            Method: post
+            Path: /add
+          Type: Api
+      Handler: app.postHandler
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: DataStoreTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
